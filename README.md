@@ -5,15 +5,14 @@
 現状は[jungordm0x0m](https://crowdworks.jp/public/employers/1359924)の「コピペでPC簡単作業！」を自動化するツールとして運用
 
 ## 主な機能
-キーワードリストに記載されている単語を検索エンジン（YahooJapan、Google）で検索し、検索結果の最後にヒットしたページのURLを取得si
-ていく。
+キーワードリストに記載されている単語をYahooJapanで検索し、検索結果の最後にヒットしたページのURLを取得していく。
 
 検索するキーワードはkeywords/target.txtを参照している。
 
 jungordm0x0mのタスクに記載されている単語をコピペできるように、改行2つ区切りで配列化している。
 
 ## バージョン情報
-|  ---      |  バージョン  |
+|  ---      |  version  |
 |  ----     |  ----     |
 |  Python   |  3.10.5   |
 |  selenium |  4.2.0    |
@@ -22,7 +21,7 @@ jungordm0x0mのタスクに記載されている単語をコピペできるよ�
 #### 1. Pythonのインストール
 https://www.python.org/
 
-#### 2. インストール確認
+#### 2. Pythonインストール確認
 ```shell
 $ python --version
 ```
