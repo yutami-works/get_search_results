@@ -15,7 +15,7 @@ service = Service(executable_path=ChromeDriverManager().install())
 
 # option
 options = Options()
-#options.add_argument('--headless')                                     # バックグラウンドモード
+options.add_argument('--headless')                                     # バックグラウンドモード
 options.add_experimental_option('detach', True)                        # 処理終了後にブラウザ閉じない
 options.add_experimental_option('excludeSwitches', ['enable-logging']) # webUSBのログ消す？
 
