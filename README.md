@@ -53,7 +53,19 @@ $ cd "クローンしたディレクトリ"
 ```
 ※エクスプローラ上でcmdでも可
 
-#### 2. スクリプト実行
+#### 2. 検索ワードリスト作成
+target.txtに検索ワードをコピペ（1ワード\n\n区切り）
+
+#### 3. スクリプト実行
+YahooJapanの場合
 ```shell
-$ python get_yahoo_results.py
+$ python get_yjsearch_results.py
+```
+スマホ版YahooJapanの場合
+```shell
+$ python get_ymobile_results.py
+```
+Yahooショッピングの場合
+```shell
+$ python get_yshopping_results.py
 ```
