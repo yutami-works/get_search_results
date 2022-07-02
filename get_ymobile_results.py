@@ -38,7 +38,7 @@ with open('./keywords/target.txt', 'r', encoding='utf-8') as f:
 
 ########## main ##########
 print('--------------------------------------------------')
-print('start: ' + exe_time)
+print('start: %s' %exe_time)
 print('first word = ' + keywords[0])
 print('--------------------------------------------------')
 
