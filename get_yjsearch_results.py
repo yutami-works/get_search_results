@@ -49,11 +49,16 @@ for keyword in keywords:
 
     # 検索結果ページ
     driver.implicitly_wait(10)
-    #next = driver.find_element(By.XPATH, '//*[@id="contents__wrap"]/div[1]/div[3]/div[2]/div/div[1]/a[1]')
     # 検索結果の一覧取得
     targets = driver.find_elements(By.CLASS_NAME, "Algo")
+    res = len(targets)
     # URL取得
-    print(targets[-1].find_element(By.TAG_NAME, 'a').get_attribute("href"))
+    if res == 0:
+        print('再検索：' + keyword)
+    elif res < RANK:
+        print(targets[-1].find_element(By.TAG_NAME, 'a').get_attribute("href"))
+    else:
+        print(targets[target_num].find_element(By.TAG_NAME, 'a').get_attribute("href"))
     # 検索ページに戻る
     driver.back()
 
