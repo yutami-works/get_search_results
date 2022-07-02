@@ -34,8 +34,8 @@ with open('./keywords/target.txt', 'r', encoding='utf-8') as f:
 
 ########## main ##########
 print('--------------------------------------------------')
-print('start: ' + exe_time)
-print('first word = ' + keywords[0])
+print(f'start: {exe_time}')
+print(f'first word = {keywords[0]}')
 print('--------------------------------------------------')
 
 # サイトにアクセス
@@ -63,7 +63,7 @@ for keyword in keywords:
     driver.back()
 
 print('--------------------------------------------------')
-print('last word = ' + keywords[-1])
+print(f'last word = {keywords[-1]}')
 print('--------------------------------------------------')
 
 driver.quit()
