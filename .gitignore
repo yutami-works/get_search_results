@@ -1,2 +1,5 @@
 .history/
 keywords/*.txt
+mobile_key/*.txt
+price_key/*.txt
+search_key/*.txt
