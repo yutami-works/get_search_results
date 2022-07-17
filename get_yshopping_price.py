@@ -24,7 +24,7 @@ driver = webdriver.Chrome(service=service, options=options)
 ## 変数定義 ##
 URL = 'https://shopping.yahoo.co.jp/'
 NAME_SEARCH = 'p'
-CN_PRICE = "_15NzwMnSG6fE"
+CN_PRICE = "_3-CgJZLU91dR"
 exe_time = datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S')
 
 # loading words list
