@@ -6,6 +6,7 @@ import datetime, glob
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
@@ -16,6 +17,7 @@ service = Service(executable_path=ChromeDriverManager().install())
 # option
 options = Options()
 options.add_argument('--headless')                                     # バックグラウンドモード
+options.add_argument('--disable-extensions')                           # 拡張機能無効
 options.add_experimental_option('detach', True)                        # 処理終了後にブラウザ閉じない
 options.add_experimental_option('excludeSwitches', ['enable-logging']) # webUSBのログ消す？
 
@@ -24,6 +26,7 @@ driver = webdriver.Chrome(service=service, options=options)
 # 定数
 URL = 'https://www.yahoo.co.jp/'
 X_SEARCH = '//*[@id="ContentWrapper"]/header/section[1]/div/form/fieldset/span/input'
+CN_RESULT = "Algo"
 KEY_PATH = "search_key/*.txt"
 RANK = 10
 target_num = RANK - 1
@@ -53,14 +56,15 @@ for file in file_list:
 
     for keyword in keywords:
         driver.implicitly_wait(10)
+        #EC.visibility_of_element_located((By.XPATH, X_SEARCH)) # なんかエラーになる
         SEARCH_BOX = driver.find_element(By.XPATH, X_SEARCH)
         SEARCH_BOX.send_keys(keyword)
         SEARCH_BOX.submit()
 
-        # 検索結果ページ
-        driver.implicitly_wait(10)
-        # 検索結果の一覧取得
-        targets = driver.find_elements(By.CLASS_NAME, "Algo")
+        # 検索結果取得
+        #driver.implicitly_wait(10)
+        EC.visibility_of_element_located((By.CLASS_NAME, CN_RESULT))
+        targets = driver.find_elements(By.CLASS_NAME, CN_RESULT)
         res = len(targets)
         # URL取得
         if res == 0:
@@ -70,7 +74,7 @@ for file in file_list:
         else:
             print(targets[target_num].find_element(By.TAG_NAME, 'a').get_attribute("href"))
         # 検索ページに戻る
-        driver.back()
+        driver.back()   # 戻るボタンがブロックの原因かもなので直す
 
     print('--------------------------------------------------')
     print(f'last word = {keywords[-1]}')
