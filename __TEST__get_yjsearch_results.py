@@ -62,22 +62,31 @@ for file in file_list:
         SEARCH_BOX.submit()
 
         # 検索結果取得
-        #driver.implicitly_wait(10)
-        EC.visibility_of_element_located((By.CLASS_NAME, CN_RESULT))
-        targets = driver.find_elements(By.CLASS_NAME, CN_RESULT)
-        res = len(targets)
-        # URL取得
-        if res == 0:
-            #print('再検索：' + keyword)
-            print('アクセスブロックのためリストをスキップします。（待機3秒）')
-            time.sleep(3)
-            break
-        elif res < RANK:
-            print(targets[-1].find_element(By.TAG_NAME, 'a').get_attribute("href"))
+        for _ in range(3): # 最大3回実行
+            try:
+                EC.visibility_of_element_located((By.CLASS_NAME, CN_RESULT))
+                targets = driver.find_elements(By.CLASS_NAME, CN_RESULT)
+            except Exception as e:
+                # 失敗時の処理(不要ならpass)
+                driver.back()
+                time.sleep(3)
+                EC.visibility_of_element_located((By.CLASS_NAME, CN_RESULT))
+                targets = driver.find_elements(By.CLASS_NAME, CN_RESULT)
+            else:
+                # 失敗しなかった場合は、ループを抜ける
+                res = len(targets)
+                # URL取得
+                if res < RANK:
+                    print(targets[-1].find_element(By.TAG_NAME, 'a').get_attribute("href"))
+                else:
+                    print(targets[target_num].find_element(By.TAG_NAME, 'a').get_attribute("href"))
+                break
         else:
-            print(targets[target_num].find_element(By.TAG_NAME, 'a').get_attribute("href"))
+            # リトライが全部失敗したときの処理
+            print('再検索：' + keyword)
         # 検索ページに戻る
         driver.back()   # 戻るボタンがブロックの原因かもなので直す
+        #driver.get(URL)
 
     print('--------------------------------------------------')
     print(f'last word = {keywords[-1]}')
