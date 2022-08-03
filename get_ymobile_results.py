@@ -2,7 +2,7 @@
 Python   3.10.5
 selenium 4.2.0
 '''
-import datetime, glob
+import datetime, glob, time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
@@ -71,7 +71,10 @@ for file in file_list:
         res = len(targets)
         # URL取得
         if res == 0:
-            print('再検索：' + keyword)
+            #print('再検索：' + keyword)
+            print('アクセスブロックのためリストをスキップします。（待機3秒）')
+            time.sleep(3)
+            break
         elif res < RANK:
             print(targets[-1].find_element(By.TAG_NAME, 'a').get_attribute("href"))
         else:
