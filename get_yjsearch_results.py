@@ -68,8 +68,8 @@ for file in file_list:
         res = len(targets)
         # URL取得
         if res == 0:
-            #print('再検索：' + keyword)
-            print('アクセスブロックのためリストをスキップします。（待機3秒）')
+            print('次はここから再検索：' + keyword)
+            #print('アクセスブロックのためリストをスキップします。（待機3秒）')
             time.sleep(3)
             break
         elif res < RANK:
